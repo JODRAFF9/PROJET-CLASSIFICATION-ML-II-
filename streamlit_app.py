@@ -1,11 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import joblib
-from sklearn.metrics import mean_absolute_error, mean_squared_error
-import streamlit.components.v1 as components
-from xgboost import XGBRegressor
+
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Prédiction des prix immobiliers", layout="wide")
