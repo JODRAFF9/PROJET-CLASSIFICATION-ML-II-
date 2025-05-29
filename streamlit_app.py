@@ -110,3 +110,7 @@ elif st.session_state.page == "Analyse":
 # Section Accueil
 if st.session_state.page == "Prédiction":
     st.write("---")
+    
+# Section Accueil
+if st.session_state.page == "A-propos":
+    st.write("---")
