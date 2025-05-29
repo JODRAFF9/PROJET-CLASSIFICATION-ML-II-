@@ -1,39 +1,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import seaborn as sns # type: ignore
 import matplotlib.pyplot as plt
 import joblib
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import streamlit.components.v1 as components
 from xgboost import XGBRegressor
+
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Prédiction des prix immobiliers", layout="wide")
-
-# Fonction pour charger le modèle Ridge (mise en cache)
-@st.cache_resource
-def load_lgb_model():
-    model_path = 'ressource/modele_final/lgb_model.pkl'
-    return joblib.load(model_path)
-
-lgb_model = load_lgb_model()
-
-# Chargement des autres Ressourcesss
-data_performances = {
-    "Linear Regression": joblib.load('ressource/performance/GS_lr_perform.pkl'),
-    "ElasticNet": joblib.load('ressource/performance/ElasticNet_perform.pkl'),
-    "Random Forest Regressor": joblib.load('ressource/performance/rfr_perform.pkl'),
-    "XGBoost": joblib.load('ressource/performance/xgb_perform.pkl'),
-    "LightGBM": joblib.load('ressource/performance/lgb_perform.pkl')
-}
-
-modeles = {
-    "Linear Regression": joblib.load('ressource/modele/GS_lr_model.pkl'),
-    "ElasticNet": joblib.load('ressource/modele/ElasticNet_model.pkl'),
-    "Random Forest Regressor": joblib.load('ressource/modele/rfr_model.pkl'),
-    "XGBoost": joblib.load('ressource/modele/rfr_model.pkl'),
-    "LightGBM": joblib.load('ressource/modele/lgb_model.pkl')
-}
 
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
@@ -45,8 +20,8 @@ def load_data(file_path):
         return pd.DataFrame()
 
 # Chargement des données
-train_df = load_data("data/data_apuree.csv")
-train_df_labelled = load_data("data/data_apuree.csv")
+train_df = load_data("data/cleaned data/train_df.csv")
+train_df_labelled = load_data("data/cleaned data/train_df.csv")
 
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
@@ -70,9 +45,7 @@ with col2:
 with col3:
     if st.button("🔍 Prédiction"):
         set_page("Prédiction")
-with col4:
-    if st.button("📈 Performance"):
-        set_page("Performance")
+
 
 # Section Accueil
 if st.session_state.page == "Accueil":
@@ -84,19 +57,6 @@ if st.session_state.page == "Accueil":
         - 📊 Analyser les **tendances des prix immobiliers**.
         - 🛠️ Évaluer les **performances des modèles** utilisés.
     """)
-
-    st.header("🗂 Description des Données")
-    file_path = "ressource/data_description.txt"
-
-    try:
-        with open(file_path, "r") as file:
-            description = file.read()
-    except FileNotFoundError:
-        st.error(f"Le fichier '{file_path}' est introuvable.")
-        st.stop()
-
-    st.text_area("Aperçu de la description des données :", description, height=300)
-    st.download_button("Télécharger la description des données", data=description, file_name="description.txt")
 
     st.info("Utilisez la barre de navigation pour explorer les différentes fonctionnalités.")
 
@@ -147,77 +107,3 @@ elif st.session_state.page == "Analyse":
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", mask=mask, fmt=".2f")
     st.pyplot(fig_corr)
     st.write("---")
-
-        # Titre de la page
-    st.subheader("📄 Rapport en HTML")
-
-    # Chemin du fichier HTML
-    html_file_path = "ressource/data_report.html"
-
-    try:
-        # Lire le contenu du fichier HTML
-        with open(html_file_path, "r", encoding="utf-8") as html_file:
-            html_content = html_file.read()
-
-        # Afficher le contenu HTML dans Streamlit
-        components.html(html_content, height=1200, scrolling=True)
-
-    except FileNotFoundError:
-        st.error(f"Le fichier '{html_file_path}' est introuvable.")
-
-# Section Prédiction
-elif st.session_state.page == "Prédiction":
-    st.subheader("🔍 Prédiction des Prix")
-    
-    # Ajout d'une liste pour que l'utilisateur puisse choisir un modèle
-    model_choice = st.selectbox("Choisissez un modèle de prédiction", list(modeles.keys()))
-
-    # Vérifier si le modèle est disponible
-#    selected_model = lgbm_pipe  # Exemple : pipeline commun si applicable
-    if model_choice in modeles:
-        selected_model = modeles[model_choice]
-    else:
-        st.error(f"Le modèle {model_choice} n'est pas disponible.")
-        st.stop()
-
-    form_data = {}
-    input_train = train_df_labelled.drop(["Prix de vente"], axis=1)
-    # Création des champs de saisie utilisateur
-    for col_label in input_train.columns:
-        if train_df_labelled[col_label].dtype == 'object':
-            form_data[col_label] = st.selectbox(f"{col_label}", input_train[col_label].unique())
-        else:
-            form_data[col_label] = st.number_input(f"{col_label}")
-
-    input_data = pd.DataFrame([form_data])
-
-    # Affichage des données saisies
-    if st.checkbox("Afficher les données saisies :"):
-        st.dataframe(input_data)
-        st.write("---")
-    # Bouton pour effectuer la prédiction
-    if st.button("Prédire"):
-        st.write("---")
-        try:
-            predicted_price = np.exp(selected_model.predict(input_data))
-            st.success(f"Prix prédit ({model_choice}) : {predicted_price[0]:,.2f} unités monétaires")
-        except Exception as e:
-            st.error(f"Erreur avec le modèle {model_choice} : {e}")
-
-# Section Performance
-elif st.session_state.page == "Performance":
-    st.subheader("📈 Performance des Modèles")
-    cols = st.columns(3)
-    for i, (model_name, performance_df) in enumerate(data_performances.items()):
-        col = cols[i % 3]
-        with col:
-            st.write(f"### {model_name}")
-            st.dataframe(performance_df)
-            fig, ax = plt.subplots()
-            ax.bar(performance_df["metric"], performance_df["train"], label="Train", alpha=0.7)
-            ax.bar(performance_df["metric"], performance_df["test"], label="Test", alpha=0.7)
-            ax.legend()
-            ax.set_title(f"Performance : {model_name}")
-            ax.tick_params(axis='both', which='major', labelsize=12,rotation=45)
-            st.pyplot(fig)
-            st.write("---")
