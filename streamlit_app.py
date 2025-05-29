@@ -4,7 +4,7 @@ import numpy as np
 
 
 # Configuration de la page Streamlit
-st.set_page_config(page_title="Prédiction des prix immobiliers", layout="wide")
+st.set_page_config(page_title="Prédiction du BANK CHURN ", layout="wide")
 
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
@@ -24,7 +24,7 @@ if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 
 # Titre de l'application
-st.title("🏡 **Application de Prédiction des Prix Immobiliers**")
+st.title("🏡 **Application de Prédiction du BANK CHURN **")
 
 # Fonction pour changer la page active dans st.session_state
 def set_page(page_name):
@@ -49,9 +49,8 @@ if st.session_state.page == "Accueil":
     st.header("Bienvenue 👋")
     st.write("""
         Cette application vous offre des outils intuitifs pour :
-        - 🟡 Prédire les **prix des maisons** à partir de caractéristiques clés.
-        - 📊 Analyser les **tendances des prix immobiliers**.
-        - 🛠️ Évaluer les **performances des modèles** utilisés.
+        - 🟡 Prédire le **BANK CHURN ** à partir de caractéristiques clés.
+        - 📊 Analyser les **du BANK CHURN **
     """)
 
     st.info("Utilisez la barre de navigation pour explorer les différentes fonctionnalités.")
