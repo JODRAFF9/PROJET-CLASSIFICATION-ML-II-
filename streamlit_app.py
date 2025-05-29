@@ -42,6 +42,9 @@ with col2:
 with col3:
     if st.button("🔍 Prédiction"):
         set_page("Prédiction")
+with col4:
+    if st.button("🔍 A-propos"):
+        set_page("A-propos")
 
 
 # Section Accueil
@@ -102,4 +105,8 @@ elif st.session_state.page == "Analyse":
     fig_corr, ax_corr = plt.subplots(figsize=(14, 12))
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", mask=mask, fmt=".2f")
     st.pyplot(fig_corr)
+    st.write("---")
+
+# Section Accueil
+if st.session_state.page == "Prédiction":
     st.write("---")
