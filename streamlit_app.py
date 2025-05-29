@@ -49,8 +49,8 @@ if st.session_state.page == "Accueil":
     st.header("Bienvenue 👋")
     st.write("""
         Cette application vous offre des outils intuitifs pour :
-        - 🟡 Prédire le **BANK CHURN ** à partir de caractéristiques clés.
-        - 📊 Analyser les **du BANK CHURN **
+        - 🟡 Prédire le **BANK CHURN** à partir de caractéristiques clés.
+        - 📊 Analyser les **du BANK CHURN**
     """)
 
     st.info("Utilisez la barre de navigation pour explorer les différentes fonctionnalités.")
