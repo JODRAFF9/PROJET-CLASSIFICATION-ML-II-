@@ -147,7 +147,7 @@ elif st.session_state.page == "Analyse":
     nomy = st.selectbox("Variable Y", noms_descriptifs)
     
     variable_x=nom_variable(nomx,mode="vers_technique")
-    variable_x=nom_variable(nomy,mode="vers_technique")
+    variable_y=nom_variable(nomy,mode="vers_technique")
     
     # Visualisation des relations entre les variables
     fig, ax = plt.subplots(figsize=(10, 8))
