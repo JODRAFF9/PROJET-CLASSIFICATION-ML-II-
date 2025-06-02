@@ -148,17 +148,18 @@ elif st.session_state.page == "Analyse":
     
     variable_x=nom_variable(nomx,mode="vers_technique")
     variable_y=nom_variable(nomy,mode="vers_technique")
-    st.write(print(f{variable_x})
+    
+    
     # Visualisation des relations entre les variables
     fig, ax = plt.subplots(figsize=(10, 8))
-    if train_df_labelled[variable_x].dtype in ['int64', 'float64'] and train_df_labelled[variable_y].dtype in ['int64', 'float64']:
+    if variable_x in num_cols and variable_y in num_cols:
         sns.scatterplot(data=train_df_labelled, x=variable_x, y=variable_y, ax=ax, color="teal", s=100, edgecolor='black')
         ax.set_title(f"Nuage de points entre {nomx} et {nomy}", fontsize=16, fontweight='bold')
         ax.set_xlabel(variable_x, fontsize=14)
         ax.set_ylabel(variable_y, fontsize=14)
         ax.tick_params(axis='both', which='major', labelsize=12,rotation=45)
         ax.grid(True, linestyle='--', alpha=0.7)
-    elif train_df_labelled[variable_x].dtype == 'object' and train_df_labelled[variable_y].dtype == 'object':
+    elif variable_x in cat_cols and variable_y in cat_cols
         grouped_train_df_labelled = train_df_labelled.groupby([variable_x, variable_y]).size().unstack()
         grouped_train_df_labelled.plot(kind='bar', stacked=True, ax=ax, cmap='coolwarm')
         ax.set_title(f"Graphique en barres empilées de {nomx} par {nomy}", fontsize=16, fontweight='bold')
