@@ -46,19 +46,19 @@ def nom_variable(nom_variable):
     """
     correspondance = {
         'id': "l'dentifiant unique",
-        'CustomerId': "l'dentifiant client",
+        'CustomerId': "l'identifiant du client",
         'Surname': 'le nom du client',
         'CreditScore': "le score crédit",
-        'Geography': 'le pays résidence',
-        'Gender': 'le genre client',
-        'Age': "l'âge client",
-        'Tenure': 'la durée relation client',
-        'Balance': 'le solde compte',
-        'NumOfProducts': 'le nombre produits souscrits',
+        'Geography': 'le pays de résidence',
+        'Gender': 'le genre du client',
+        'Age': "l'âge du client",
+        'Tenure': 'la durée de relation client',
+        'Balance': 'le solde du compte',
+        'NumOfProducts': 'le nombre de produits souscrits',
         'HasCrCard': "la possession d'une carte crédit",
         'IsActiveMember': "le statut de membre actif",
-        'EstimatedSalary': "le revenu annuel estimé',
-        'Exited': "l'indicateur attrition"
+        'EstimatedSalary': "le revenu annuel estimé",
+        'Exited': "l'indicateur d'attrition"
     }
 
     # Retourne le nom descriptif ou le nom original si non trouvé
