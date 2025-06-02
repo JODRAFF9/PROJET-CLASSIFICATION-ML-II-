@@ -69,7 +69,7 @@ if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 
 # Titre de l'application
-st.title("> 🏡 **Application de Prédiction du BANK CHURN**")
+st.title("🏡 > **Application de Prédiction du BANK CHURN**")
 # Fonction pour changer la page active dans st.session_state
 def set_page(page_name):
     st.session_state.page = page_name
