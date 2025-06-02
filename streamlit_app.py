@@ -20,6 +20,12 @@ def load_data(file_path):
 train_df = load_data("data/cleaned data/train_df.csv")
 train_df_labelled=train_df.drop(['id',"CustomerId","Surname"], axis=1)
 
+binary_mapping = {0: 'Non', 1: 'Oui'}
+binary_cols = ['HasCrCard', 'IsActiveMember', 'Exited']
+
+for col in binary_cols:
+    train_df_labelled[col] = train_df_labelled[col].map(binary_mapping)
+
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
