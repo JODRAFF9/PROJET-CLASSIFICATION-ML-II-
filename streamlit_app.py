@@ -159,7 +159,7 @@ elif st.session_state.page == "Analyse":
         ax.set_ylabel(variable_y, fontsize=14)
         ax.tick_params(axis='both', which='major', labelsize=12,rotation=45)
         ax.grid(True, linestyle='--', alpha=0.7)
-    elif (variable_x in cat_cols or variable_x in target) and (variable_y in cat_cols or variable_y in target)
+    elif (variable_x in cat_cols or variable_x in target) and (variable_y in cat_cols or variable_y in target):
         grouped_train_df_labelled = train_df_labelled.groupby([variable_x, variable_y]).size().unstack()
         grouped_train_df_labelled.plot(kind='bar', stacked=True, ax=ax, cmap='coolwarm')
         ax.set_title(f"Graphique en barres empilées de {nomx} par {nomy}", fontsize=16, fontweight='bold')
