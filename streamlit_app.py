@@ -134,19 +134,19 @@ elif st.session_state.page == "Analyse":
     st.subheader("📊 Analyse des Données")
     if st.checkbox("Afficher les données brutes"):
         st.dataframe(train_df.head(100))
-    
+
     st.write("### Statistiques descriptives")
     st.write(train_df_labelled[num_cols].describe())
 
     st.write("### Visualisation de deux variables")
-    
+
     nomx = st.selectbox("Variable X", noms_descriptifs)
     nomy = st.selectbox("Variable Y", noms_descriptifs)
-    
+
     variable_x=nom_variable(nomx,mode="vers_technique")
     variable_y=nom_variable(nomy,mode="vers_technique")
-    
-    
+
+
     # Visualisation des relations entre les variables
     fig, ax = plt.subplots(figsize=(10, 8))
     if variable_x in num_cols and variable_y in num_cols:
