@@ -20,7 +20,7 @@ def load_data(file_path):
 train_df = load_data("data/cleaned data/train_df.csv")
 train_df_labelled=train_df.drop(['id',"CustomerId","Surname"], axis=1)
 
-binary_mapping = {0: 'Non', 1: 'Oui'}
+binary_mapping = {0: 'No', 1: 'Yes'}
 binary_cols = ['HasCrCard', 'IsActiveMember', 'Exited']
 
 for col in binary_cols:
