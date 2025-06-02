@@ -18,7 +18,7 @@ def load_data(file_path):
 
 # Chargement des données
 train_df = load_data("data/cleaned data/train_df.csv")
-train_df_labelled=train_df.columns.drop(['id', 'CustomerId', 'Surname'])
+train_df_labelled=train_df.drop(['id', 'CustomerId', 'Surname'])
 
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
