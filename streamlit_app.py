@@ -34,18 +34,22 @@ for col in binary_cols:
     train_df_labelled[col] = train_df_labelled[col].map(binary_mapping)
 
 
-def nom_variable(nom_variable):
+def nom_variable(nom, mode='vers_descriptif'):
     """
-    Renvoie un nom descriptif avec espaces pour une variable de dataset bancaire.
+    Convertit entre noms techniques et noms descriptifs de variables.
 
     Args:
-        nom_variable (str): Nom original de la variable
+        nom (str): Nom à convertir (technique ou descriptif)
+        mode (str): Direction de conversion
+            'vers_descriptif' : convertit nom technique → descriptif
+            'vers_technique' : convertit nom descriptif → technique
 
     Returns:
-        str: Nom descriptif avec espaces
+        str: Nom converti
     """
     correspondance = {
-        'id': "l'dentifiant unique",
+        # Format: 'nom_technique': 'nom descriptif'
+        'id': "l'identifiant unique",
         'CustomerId': "l'identifiant du client",
         'Surname': 'le nom du client',
         'CreditScore': "le score de crédit",
@@ -61,8 +65,35 @@ def nom_variable(nom_variable):
         'Exited': "l'indicateur d'attrition"
     }
 
-    # Retourne le nom descriptif ou le nom original si non trouvé
-    return correspondance.get(nom_variable, nom_variable)
+    # Création du dictionnaire inverse pour la conversion dans l'autre sens
+    correspondance_inverse = {v: k for k, v in correspondance.items()}
+
+    if mode == 'vers_descriptif':
+        # Conversion nom technique → descriptif
+        return correspondance.get(nom, nom)
+    elif mode == 'vers_technique':
+        # Conversion nom descriptif → technique
+        return correspondance_inverse.get(nom, nom)
+    else:
+        raise ValueError("Le mode doit être soit 'vers_descriptif' soit 'vers_technique'")
+    
+    
+noms_descriptifs = [
+    "l'identifiant unique",
+    "l'identifiant du client",
+    "le nom du client",
+    "le score de crédit",
+    "le pays de résidence",
+    "le genre du client",
+    "l'âge du client",
+    "la durée de relation client",
+    "le solde du compte",
+    "le nombre de produits souscrits",
+    "la possession d'une carte crédit",
+    "le statut de membre actif",
+    "le revenu annuel estimé",
+    "l'indicateur d'attrition"
+]
 
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
@@ -89,7 +120,6 @@ with col4:
     if st.button("🔍 A-propos"):
         set_page("A-propos")
 
-
 # Section Accueil
 if st.session_state.page == "Accueil":
     st.write("---")
@@ -112,11 +142,12 @@ elif st.session_state.page == "Analyse":
     st.write(train_df_labelled[num_cols].describe())
 
     st.write("### Visualisation de deux variables")
-    variable_x = st.selectbox("Variable X", train_df_labelled.columns)
-    variable_y = st.selectbox("Variable Y", train_df_labelled.columns)
     
-    nomx=nom_variable(variable_x)
-    nomy=nom_variable(variable_y)
+    nom_x = st.selectbox("Variable X", noms_descriptifs)
+    nom_y = st.selectbox("Variable Y", noms_descriptifs)
+    
+    variable_x=nom_variable(variable_x,mode="vers_technique")
+    variable_x=nom_variable(variable_y,,mode="vers_technique")
     
     # Visualisation des relations entre les variables
     fig, ax = plt.subplots(figsize=(10, 8))
