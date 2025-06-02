@@ -18,7 +18,7 @@ def load_data(file_path):
 
 # Chargement des données
 train_df = load_data("data/cleaned data/train_df.csv")
-train_df_labelled = load_data("data/cleaned data/train_df.csv")
+train_df_labelled = load_data("data/cleaned data/train_df_labelled.csv")
 
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
@@ -63,7 +63,7 @@ if st.session_state.page == "Accueil":
 elif st.session_state.page == "Analyse":
     st.subheader("📊 Analyse des Données")
     if st.checkbox("Afficher les données brutes"):
-        st.dataframe(train_df_labelled)
+        st.dataframe(train_df)
 
     st.write("### Statistiques descriptives")
     st.write(train_df_labelled.describe())
