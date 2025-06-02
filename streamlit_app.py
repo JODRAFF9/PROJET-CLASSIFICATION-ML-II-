@@ -143,11 +143,11 @@ elif st.session_state.page == "Analyse":
 
     st.write("### Visualisation de deux variables")
     
-    nom_x = st.selectbox("Variable X", noms_descriptifs)
-    nom_y = st.selectbox("Variable Y", noms_descriptifs)
+    nomx = st.selectbox("Variable X", noms_descriptifs)
+    nomy = st.selectbox("Variable Y", noms_descriptifs)
     
-    variable_x=nom_variable(variable_x,mode="vers_technique")
-    variable_x=nom_variable(variable_y,mode="vers_technique")
+    variable_x=nom_variable(nomx,mode="vers_technique")
+    variable_x=nom_variable(nomy,mode="vers_technique")
     
     # Visualisation des relations entre les variables
     fig, ax = plt.subplots(figsize=(10, 8))
