@@ -45,20 +45,20 @@ def nom_variable(nom_variable):
         str: Nom descriptif avec espaces
     """
     correspondance = {
-        'id': 'Identifiant unique',
-        'CustomerId': 'Identifiant client',
-        'Surname': 'Nom client',
-        'CreditScore': 'Score crédit',
-        'Geography': 'Pays résidence',
-        'Gender': 'Genre client',
-        'Age': 'Âge client',
-        'Tenure': 'Durée relation client',
-        'Balance': 'Solde compte',
-        'NumOfProducts': 'Nombre produits souscrits',
-        'HasCrCard': 'Possession carte crédit',
-        'IsActiveMember': 'Statut membre actif',
-        'EstimatedSalary': 'Revenu annuel estimé',
-        'Exited': 'Indicateur attrition'
+        'id': "l'dentifiant unique",
+        'CustomerId': "l'dentifiant client",
+        'Surname': 'le nom du client',
+        'CreditScore': "le score crédit",
+        'Geography': 'le pays résidence',
+        'Gender': 'le genre client',
+        'Age': "l'âge client",
+        'Tenure': 'la durée relation client',
+        'Balance': 'le solde compte',
+        'NumOfProducts': 'le nombre produits souscrits',
+        'HasCrCard': "la possession d'une carte crédit",
+        'IsActiveMember': "le statut de membre actif",
+        'EstimatedSalary': "le revenu annuel estimé',
+        'Exited': "l'indicateur attrition"
     }
 
     # Retourne le nom descriptif ou le nom original si non trouvé
