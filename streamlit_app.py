@@ -33,6 +33,37 @@ target = 'Exited'
 for col in binary_cols:
     train_df_labelled[col] = train_df_labelled[col].map(binary_mapping)
 
+
+def nom_variable(nom_variable):
+    """
+    Renvoie un nom descriptif avec espaces pour une variable de dataset bancaire.
+
+    Args:
+        nom_variable (str): Nom original de la variable
+
+    Returns:
+        str: Nom descriptif avec espaces
+    """
+    correspondance = {
+        'id': 'Identifiant unique',
+        'CustomerId': 'Identifiant client',
+        'Surname': 'Nom client',
+        'CreditScore': 'Score crédit',
+        'Geography': 'Pays résidence',
+        'Gender': 'Genre client',
+        'Age': 'Âge client',
+        'Tenure': 'Durée relation client',
+        'Balance': 'Solde compte',
+        'NumOfProducts': 'Nombre produits souscrits',
+        'HasCrCard': 'Possession carte crédit',
+        'IsActiveMember': 'Statut membre actif',
+        'EstimatedSalary': 'Revenu annuel estimé',
+        'Exited': 'Indicateur attrition'
+    }
+
+    # Retourne le nom descriptif ou le nom original si non trouvé
+    return correspondance.get(nom_variable, nom_variable)
+
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
@@ -84,12 +115,15 @@ elif st.session_state.page == "Analyse":
     st.write("### Visualisation de deux variables")
     variable_x = st.selectbox("Variable X", train_df_labelled.columns)
     variable_y = st.selectbox("Variable Y", train_df_labelled.columns)
-
+    
+    nomx=nom_variable(variable_x)
+    nomy=nom_variable(variable_y)
+    
     # Visualisation des relations entre les variables
     fig, ax = plt.subplots(figsize=(10, 8))
     if train_df_labelled[variable_x].dtype in ['int64', 'float64'] and train_df_labelled[variable_y].dtype in ['int64', 'float64']:
         sns.scatterplot(data=train_df_labelled, x=variable_x, y=variable_y, ax=ax, color="teal", s=100, edgecolor='black')
-        ax.set_title(f"Nuage de points entre {variable_x} et {variable_y}", fontsize=16, fontweight='bold')
+        ax.set_title(f"Nuage de points entre {nomx} et {nomy}", fontsize=16, fontweight='bold')
         ax.set_xlabel(variable_x, fontsize=14)
         ax.set_ylabel(variable_y, fontsize=14)
         ax.tick_params(axis='both', which='major', labelsize=12,rotation=45)
@@ -97,14 +131,14 @@ elif st.session_state.page == "Analyse":
     elif train_df_labelled[variable_x].dtype == 'object' and train_df_labelled[variable_y].dtype == 'object':
         grouped_train_df_labelled = train_df_labelled.groupby([variable_x, variable_y]).size().unstack()
         grouped_train_df_labelled.plot(kind='bar', stacked=True, ax=ax, cmap='coolwarm')
-        ax.set_title(f"Graphique en barres empilées de {variable_x} par {variable_y}", fontsize=16, fontweight='bold')
+        ax.set_title(f"Graphique en barres empilées de {nomx} par {nomy}", fontsize=16, fontweight='bold')
         ax.set_xlabel(variable_x, fontsize=14)
         ax.set_ylabel("Effectifs", fontsize=14)
         ax.tick_params(axis='both', which='major', labelsize=12,rotation=45)
         ax.legend(title=variable_y, fontsize=12)
     else:
         sns.boxplot(data=train_df_labelled, x=variable_x, y=variable_y, ax=ax, palette="Set2")
-        ax.set_title(f"Graphique de boîte de {variable_y} par {variable_x}", fontsize=16, fontweight='bold')
+        ax.set_title(f"Graphique de boîte de {nomy} par {nomx}", fontsize=16, fontweight='bold')
         ax.set_xlabel(variable_x, fontsize=14)
         ax.set_ylabel(variable_y, fontsize=14)
         ax.tick_params(axis='both', which='major', labelsize=12,rotation=45)
@@ -113,7 +147,7 @@ elif st.session_state.page == "Analyse":
     st.write("---")
 
     st.write("### Matrice de Corrélation")
-    correlation_matrix = train_df_labelled.select_dtypes(include=['int64', 'float64']).corr()
+    correlation_matrix = train_df_labelled[num_cols].corr()
     mask = np.triu(np.ones_like(correlation_matrix, dtype=bool))
     fig_corr, ax_corr = plt.subplots(figsize=(14, 12))
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", mask=mask, fmt=".2f")
