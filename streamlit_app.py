@@ -79,9 +79,6 @@ def nom_variable(nom, mode='vers_descriptif'):
     
     
 noms_descriptifs = [
-    "l'identifiant unique",
-    "l'identifiant du client",
-    "le nom du client",
     "le score de crédit",
     "le pays de résidence",
     "le genre du client",
