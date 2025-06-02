@@ -148,7 +148,7 @@ elif st.session_state.page == "Analyse":
     
     variable_x=nom_variable(nomx,mode="vers_technique")
     variable_y=nom_variable(nomy,mode="vers_technique")
-    
+    st.write(print(f{variable_x})
     # Visualisation des relations entre les variables
     fig, ax = plt.subplots(figsize=(10, 8))
     if train_df_labelled[variable_x].dtype in ['int64', 'float64'] and train_df_labelled[variable_y].dtype in ['int64', 'float64']:
