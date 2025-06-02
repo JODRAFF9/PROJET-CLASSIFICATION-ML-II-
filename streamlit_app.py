@@ -23,6 +23,13 @@ train_df_labelled=train_df.drop(['id',"CustomerId","Surname"], axis=1)
 binary_mapping = {0: 'No', 1: 'Yes'}
 binary_cols = ['HasCrCard', 'IsActiveMember', 'Exited']
 
+cat_cols = ['Geography', 'Gender', 'Tenure', 'NumOfProducts', 'HasCrCard',
+       'IsActiveMember']
+
+num_cols = ['CreditScore', 'Age', 'Balance', 'EstimatedSalary']
+
+target = 'Exited'
+
 for col in binary_cols:
     train_df_labelled[col] = train_df_labelled[col].map(binary_mapping)
 
@@ -70,9 +77,9 @@ elif st.session_state.page == "Analyse":
     st.subheader("📊 Analyse des Données")
     if st.checkbox("Afficher les données brutes"):
         st.dataframe(train_df.head(100))
-
+    
     st.write("### Statistiques descriptives")
-    st.write(train_df_labelled.describe())
+    st.write(train_df_labelled[num_cols].describe())
 
     st.write("### Visualisation de deux variables")
     variable_x = st.selectbox("Variable X", train_df_labelled.columns)
