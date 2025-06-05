@@ -231,10 +231,10 @@ elif st.session_state.page == "Analyse":
     #                 title="Matrice de Corrélation")
     # st.plotly_chart(fig4, use_container_width=True)
 
-    # 5. Sélection interactive : Salary vs Churn selon le pays
-    st.markdown("### 📊 Analyse personnalisée")
-    selected_country = st.selectbox("Choisir un pays", train_df_labelled["Geography"].unique())
-    filtered_train_df_labelled = train_df_labelled[train_df_labelled["Geography"] == selected_country]
+    # # 5. Sélection interactive : Salary vs Churn selon le pays
+    # st.markdown("### 📊 Analyse personnalisée")
+    # selected_country = st.selectbox("Choisir un pays", train_df_labelled["Geography"].unique())
+    # filtered_train_df_labelled = train_df_labelled[train_df_labelled["Geography"] == selected_country]
 
     fig5 = px.scatter(filtered_train_df_labelled, x="EstimatedSalary", y="Age", color="Exited",
                     title=f"Salaire vs Âge ({selected_country})",
