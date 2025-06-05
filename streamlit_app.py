@@ -18,6 +18,9 @@ st.markdown(
         color: #0c0c0c;
     }
     
+    h1 {
+        color: #004d99;
+    }
 
     </style>
     """,
