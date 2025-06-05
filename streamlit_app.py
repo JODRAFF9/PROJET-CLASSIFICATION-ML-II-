@@ -206,7 +206,7 @@ elif st.session_state.page == "Analyse":
     col4, col5 = st.columns(2)
     with col4:
         fig1 = px.histogram(train_df_labelled, x="Geography", color="Exited", barmode="group",
-                            title="Churn par Géographie", color_discrete_map={0:"green", 1:"red"})
+                            title="Churn par Géographie", color_discrete_map={"No":"green", Y"es:"red"})
         st.plotly_chart(fig1, use_container_width=True)
 
     # 2. Répartition homme/femme dans le churn
@@ -214,14 +214,14 @@ elif st.session_state.page == "Analyse":
         gender_churn = train_df_labelled.groupby(['Gender', 'Exited']).size().reset_index(name='count')
         fig2 = px.bar(gender_churn, x='Gender', y='count', color='Exited',
                     title="Churn par Sexe", barmode="group",
-                    color_discrete_map={0:"green", 1:"red"})
+                    color_discrete_map={"No":"green", "Yes":"red"})
         st.plotly_chart(fig2, use_container_width=True)
 
     # 3. Age vs Churn
     st.markdown("### 🎯 la rélation entre âge et Churn")
     fig3 = px.box(train_df_labelled, x='Exited', y='Age', color='Exited', 
                 title='Répartition de l\'âge selon le statut (Churn)', 
-                color_discrete_map={0: "green", 1: "red"})
+                color_discrete_map={"No": "green", "Yes": "red"})
     st.plotly_chart(fig3, use_container_width=True)
 
     # # 4. Corrélation entre variables numériques
