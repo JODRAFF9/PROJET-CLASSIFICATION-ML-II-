@@ -150,19 +150,6 @@ if st.session_state.page == "Accueil":
         - 🟡 Prédire le **BANK CHURN** à partir de caractéristiques clés.
         - 📊 Analyser les **du BANK CHURN**
     """)
-    
-    st.header(" Description des donnée")
-    file_path="docs/description.txt"
-    
-    try:
-        with open(file_path, "r") as file:
-            description = file.read()
-    except FileNotFoundError:
-        st.error(f"Le fichier '{file_path}' est introuvable.")
-        st.stop()
-
-    st.text_area("Aperçu de la description des données :", description, height=300)
-    st.download_button("Télécharger la description des données", data=description, file_name="description.txt")
 
     st.info("Utilisez la barre de navigation pour explorer les différentes fonctionnalités.")
 
@@ -217,6 +204,19 @@ elif st.session_state.page == "Analyse":
     fig_corr, ax_corr = plt.subplots(figsize=(14, 12))
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", mask=mask, fmt=".2f")
     st.pyplot(fig_corr)
+
+    st.header(" Description des donnée")
+    file_path="docs/description.txt"
+    
+    try:
+        with open(file_path, "r") as file:
+            description = file.read()
+    except FileNotFoundError:
+        st.error(f"Le fichier '{file_path}' est introuvable.")
+        st.stop()
+
+    st.text_area("Aperçu de la description des données :", description, height=300)
+    st.download_button("Télécharger la description des données", data=description, file_name="description.txt")
     st.write("---")
 
 # Section Accueil
