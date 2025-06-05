@@ -194,7 +194,7 @@ elif st.session_state.page == "Analyse":
     with col1:
         st.metric("👥 Clients", train_df_labelled.shape[0])
     with col2:
-        churn_rate = train_df_labelled['Exited'].mean() * 100
+        churn_rate = (train_df_labelled['Exited']=="Yes").mean() * 100
         st.metric("❌ Churn Rate", f"{churn_rate:.2f} %")
     with col3:
         avg_salary = train_df_labelled["EstimatedSalary"].mean()
