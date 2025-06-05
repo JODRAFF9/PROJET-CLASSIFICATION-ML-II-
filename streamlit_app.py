@@ -31,7 +31,7 @@ st.markdown(
 
     /* Styliser les boutons */
     .stButton>button {
-        background-color: #007bff;
+        background-color: black;
         color: white;
         border: none;
         padding: 0.5em 1.2em;
