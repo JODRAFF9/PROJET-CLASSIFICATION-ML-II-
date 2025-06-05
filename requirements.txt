@@ -44,4 +44,3 @@ tzdata==2025.2
 urllib3==2.4.0
 watchdog==6.0.0
 plotly==5.18.0
-base64
