@@ -206,7 +206,7 @@ elif st.session_state.page == "Analyse":
     col4, col5 = st.columns(2)
     with col4:
         fig1 = px.histogram(train_df_labelled, x="Geography", color="Exited", barmode="group",
-                            title="Churn par Géographie", color_discrete_map={"No":"green", Y"es:"red"})
+                            title="Churn par Géographie", color_discrete_map={"No":"green", "Yes":"red"})
         st.plotly_chart(fig1, use_container_width=True)
 
     # 2. Répartition homme/femme dans le churn
