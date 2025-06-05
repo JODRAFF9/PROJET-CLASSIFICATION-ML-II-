@@ -16,7 +16,16 @@ st.markdown(
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
+        
+    .icon-float {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    }
     </style>
+
+    <img src="https://urlr.me/2CndGU" class="icon-float">
     """,
     unsafe_allow_html=True
 )
