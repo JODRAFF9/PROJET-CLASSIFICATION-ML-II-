@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
@@ -186,6 +187,63 @@ if st.session_state.page == "Accueil":
 # Section Analyse
 elif st.session_state.page == "Analyse":
     st.subheader("📊 Analyse des Données")
+    st.title("💼 Dashboard Churn Client - Banque")
+
+    # KPIs de résumé
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("👥 Clients", df.shape[0])
+    with col2:
+        churn_rate = df['Exited'].mean() * 100
+        st.metric("❌ Churn Rate", f"{churn_rate:.2f} %")
+    with col3:
+        avg_salary = df["EstimatedSalary"].mean()
+        st.metric("💰 Salaire Moyen", f"{avg_salary:,.0f} €")
+
+    st.markdown("---")
+
+    # 1. Répartition du Churn par Pays
+    col4, col5 = st.columns(2)
+    with col4:
+        fig1 = px.histogram(df, x="Geography", color="Exited", barmode="group",
+                            title="Churn par Géographie", color_discrete_map={0:"green", 1:"red"})
+        st.plotly_chart(fig1, use_container_width=True)
+
+    # 2. Répartition homme/femme dans le churn
+    with col5:
+        gender_churn = df.groupby(['Gender', 'Exited']).size().reset_index(name='count')
+        fig2 = px.bar(gender_churn, x='Gender', y='count', color='Exited',
+                    title="Churn par Sexe", barmode="group",
+                    color_discrete_map={0:"green", 1:"red"})
+        st.plotly_chart(fig2, use_container_width=True)
+
+    # 3. Age vs Churn
+    st.markdown("### 🎯 Âge et Churn")
+    fig3 = px.box(df, x='Exited', y='Age', color='Exited', 
+                title='Répartition de l\'âge selon le statut (Churn)', 
+                color_discrete_map={0: "green", 1: "red"})
+    st.plotly_chart(fig3, use_container_width=True)
+
+    # 4. Corrélation entre variables numériques
+    st.markdown("### 🔍 Corrélation")
+    correlation = df[num_cols].corr()
+    fig4 = px.imshow(correlation, text_auto=True, color_continuous_scale='RdBu_r',
+                    title="Matrice de Corrélation")
+    st.plotly_chart(fig4, use_container_width=True)
+
+    # 5. Sélection interactive : Salary vs Churn selon le pays
+    st.markdown("### 📊 Analyse personnalisée")
+    selected_country = st.selectbox("Choisir un pays", df["Geography"].unique())
+    filtered_df = df[df["Geography"] == selected_country]
+
+    fig5 = px.scatter(filtered_df, x="EstimatedSalary", y="Age", color="Exited",
+                    title=f"Salaire vs Âge ({selected_country})",
+                    color_discrete_map={0:"green", 1:"red"})
+    st.plotly_chart(fig5, use_container_width=True)
+        
+    
+    
+    """
     if st.checkbox("Afficher les données brutes"):
         st.dataframe(train_df.head(100))
 
@@ -247,8 +305,8 @@ elif st.session_state.page == "Analyse":
 
     st.text_area("Aperçu de la description des données :", description, height=300)
     st.download_button("Télécharger la description des données", data=description, file_name="description.txt")
-    st.write("---")
-
+    st.write("---") */
+    """
 # Section Accueil
 if st.session_state.page == "Prédiction":
     st.write("---")
