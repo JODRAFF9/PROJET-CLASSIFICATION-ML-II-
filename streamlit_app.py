@@ -246,8 +246,9 @@ elif st.session_state.page == "Analyse":
         fig3.update_layout(transition=dict(duration=0))
 
         return fig1, fig2, fig3
-
-
+    
+    fig1, fig2, fig3 = compute_figs(train_df_labelled)
+    
     col4, col5 = st.columns(2)
     with col4:
         st.plotly_chart(fig1, use_container_width=True)
