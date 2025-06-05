@@ -41,9 +41,11 @@ st.markdown(
         transition: background-color 0.3s ease;
     }
 
-    .stButton>button:hover {
+    .stButton > button:hover {
         background-color: #7ED957;
+        color: black; /* ou white, selon le contraste voulu */
     }
+
 
     </style>
     """,
