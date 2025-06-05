@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Configuration de la page Streamlit
-st.set_page_config(page_title="Prédiction du BANK CHURN ", layout="wide")
+st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
+
 
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
