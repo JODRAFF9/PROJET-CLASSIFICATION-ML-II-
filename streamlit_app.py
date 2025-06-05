@@ -45,6 +45,7 @@ st.markdown(
         background-color: #7ED957;
         color: black;
         transform: scale(1.05); /* agrandissement de 5% */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     }
 
 
