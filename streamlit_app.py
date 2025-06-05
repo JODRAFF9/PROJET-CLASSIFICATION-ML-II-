@@ -7,6 +7,22 @@ import seaborn as sns
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
 
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("https://urlr.me/JbhpKx");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.title("📊 Mon App avec une image de fond")
+
 
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
