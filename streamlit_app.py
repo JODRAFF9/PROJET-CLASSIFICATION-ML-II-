@@ -43,8 +43,9 @@ st.markdown(
 
     .stButton > button:hover {
         background-color: #7ED957;
-        color: black; /* ou white, selon le contraste voulu */
+        transform: scale(1.05); /* agrandissement de 5% */
     }
+
 
 
     </style>
