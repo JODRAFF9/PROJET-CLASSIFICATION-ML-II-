@@ -17,9 +17,32 @@ st.markdown(
         background-attachment: fixed;
         color: white;
     }
-    
-    h1 {
-        color: #004d99;
+
+        /* Styliser les titres */
+    h1, h2, h3 {
+        color: black;
+    }
+
+    /* Centrer les colonnes de la navbar */
+    div[data-testid="column"] {
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Styliser les boutons */
+    .stButton>button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5em 1.2em;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .stButton>button:hover {
+        background-color: #0056b3;
     }
 
     </style>
@@ -138,7 +161,7 @@ with col3:
     if st.button("🔍 Prédiction"):
         set_page("Prédiction")
 with col4:
-    if st.button("🔍 A-propos"):
+    if st.button("ℹ️ A-propos"):
         set_page("A-propos")
 
 # Section Accueil
