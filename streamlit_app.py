@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+import base64
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
@@ -367,7 +368,26 @@ if st.session_state.page == "A-propos":
         st.stop()
 
     st.code(description, language="markdown")
-    st.download_button("Télécharger la description des données", data=description, file_name="description.txt")
+
+    def get_download_button_html(text, filename, button_text, bg_color="#4CAF50", text_color="white"):
+        b64 = base64.b64encode(text.encode()).decode()
+        return f"""
+        <a href="data:text/plain;base64,{b64}" download="{filename}">
+            <button style="
+                background-color:{bg_color};
+                color:{text_color};
+                padding:10px 20px;
+                border:none;
+                border-radius:5px;
+                cursor:pointer;
+                font-size:16px;
+            ">{button_text}</button>
+        </a>
+        """
+
+    custom_button = get_download_button_html(description, "description.txt", "📥 Télécharger la description", "#007acc")
+    st.markdown(custom_button, unsafe_allow_html=True)
+
     st.write("---") 
     st.write("---")
     
