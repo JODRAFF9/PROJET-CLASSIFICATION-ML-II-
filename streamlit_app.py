@@ -186,19 +186,42 @@ if st.session_state.page == "Accueil":
 
 # Section Analyse
 elif st.session_state.page == "Analyse":
-    st.subheader("📊 Analyse des Données")
-    st.title("💼 Dashboard Churn Client - Banque")
+col1, col2, col3 = st.columns(3)
 
-    # KPIs de résumé
-    col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("👥 Clients", train_df_labelled.shape[0])
+        st.markdown(
+            f"""
+            <div style="background-color:#f0f8ff; padding:20px; border-radius:10px; text-align:center">
+                <h3>👥 Clients</h3>
+                <p style="font-size:28px; color:#007acc;"><strong>{train_df_labelled.shape[0]}</strong></p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
     with col2:
-        churn_rate = (train_df_labelled['Exited']=="Yes").mean() * 100
-        st.metric("❌ Churn Rate", f"{churn_rate:.2f} %")
+        churn_rate = (train_df_labelled['Exited'] == "Yes").mean() * 100
+        st.markdown(
+            f"""
+            <div style="background-color:#fff0f0; padding:20px; border-radius:10px; text-align:center">
+                <h3>❌ Churn Rate</h3>
+                <p style="font-size:28px; color:#cc0000;"><strong>{churn_rate:.2f} %</strong></p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
     with col3:
         avg_salary = train_df_labelled["EstimatedSalary"].mean()
-        st.metric("💰 Salaire Moyen", f"{avg_salary:,.0f} €")
+        st.markdown(
+            f"""
+            <div style="background-color:#f0fff0; padding:20px; border-radius:10px; text-align:center">
+                <h3>💰 Salaire Moyen</h3>
+                <p style="font-size:28px; color:#008000;"><strong>{avg_salary:,.0f} €</strong></p>
+            </div>
+            """,
+            unsafe_allow_html=True
+    )
 
     st.markdown("---")
 
