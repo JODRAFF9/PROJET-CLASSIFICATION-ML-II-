@@ -21,8 +21,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("📊 Mon App avec une image de fond")
-
 
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
