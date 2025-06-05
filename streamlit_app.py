@@ -366,7 +366,7 @@ if st.session_state.page == "A-propos":
         st.error(f"Le fichier '{file_path}' est introuvable.")
         st.stop()
 
-    st.text_area("Aperçu de la description des données :", description, height=300)
+    st.code(description, language="markdown")
     st.download_button("Télécharger la description des données", data=description, file_name="description.txt")
     st.write("---") 
     st.write("---")
