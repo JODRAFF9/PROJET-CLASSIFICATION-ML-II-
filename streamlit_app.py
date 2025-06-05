@@ -224,12 +224,12 @@ elif st.session_state.page == "Analyse":
                 color_discrete_map={0: "green", 1: "red"})
     st.plotly_chart(fig3, use_container_width=True)
 
-    # 4. Corrélation entre variables numériques
-    st.markdown("### 🔍 Corrélation")
-    correlation = train_df_labelled[num_cols].corr()
-    fig4 = px.imshow(correlation, text_auto=True, color_continuous_scale='RdBu_r',
-                    title="Matrice de Corrélation")
-    st.plotly_chart(fig4, use_container_width=True)
+    # # 4. Corrélation entre variables numériques
+    # st.markdown("### 🔍 Corrélation")
+    # correlation = train_df_labelled[num_cols].corr()
+    # fig4 = px.imshow(correlation, text_auto=True, color_continuous_scale='RdBu_r',
+    #                 title="Matrice de Corrélation")
+    # st.plotly_chart(fig4, use_container_width=True)
 
     # 5. Sélection interactive : Salary vs Churn selon le pays
     st.markdown("### 📊 Analyse personnalisée")
