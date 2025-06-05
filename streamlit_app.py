@@ -186,7 +186,7 @@ if st.session_state.page == "Accueil":
 
 # Section Analyse
 elif st.session_state.page == "Analyse":
-col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.markdown(
