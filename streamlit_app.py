@@ -17,7 +17,13 @@ st.markdown(
         background-attachment: fixed;
     }
     
+    h1 {
+        color: #004d99;
+    }
+
+    </style>
     """,
+    
     unsafe_allow_html=True
 )
 
@@ -112,6 +118,8 @@ if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 
 # Titre de l'application
+
+
 st.title("🏡 **Application de Prédiction du BANK CHURN**")
 # Fonction pour changer la page active dans st.session_state
 def set_page(page_name):
