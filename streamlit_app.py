@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Configuration de la page Streamlit
-st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" )
+st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
 
 st.markdown(
     """
@@ -16,16 +16,7 @@ st.markdown(
         background-repeat: no-repeat;
         background-attachment: fixed;
     }
-        
-    .icon-float {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 40px;
-    }
-    </style>
-
-    <img src="https://urlr.me/2CndGU" class="icon-float">
+    
     """,
     unsafe_allow_html=True
 )
