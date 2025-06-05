@@ -236,10 +236,10 @@ elif st.session_state.page == "Analyse":
     # selected_country = st.selectbox("Choisir un pays", train_df_labelled["Geography"].unique())
     # filtered_train_df_labelled = train_df_labelled[train_df_labelled["Geography"] == selected_country]
 
-    fig5 = px.scatter(filtered_train_df_labelled, x="EstimatedSalary", y="Age", color="Exited",
-                    title=f"Salaire vs Âge ({selected_country})",
-                    color_discrete_map={0:"green", 1:"red"})
-    st.plotly_chart(fig5, use_container_width=True)
+    # fig5 = px.scatter(filtered_train_df_labelled, x="EstimatedSalary", y="Age", color="Exited",
+    #                 title=f"Salaire vs Âge ({selected_country})",
+    #                 color_discrete_map={0:"green", 1:"red"})
+    # st.plotly_chart(fig5, use_container_width=True)
         
     
     
