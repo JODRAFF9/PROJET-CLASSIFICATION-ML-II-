@@ -224,28 +224,61 @@ elif st.session_state.page == "Analyse":
     )
 
     st.markdown("---")
+    
+    @st.cache_data
+    def compute_gender_churn(df):
+        return df.groupby(['Gender', 'Exited']).size().reset_index(name='count')
 
-    # 1. Répartition du Churn par Pays
-    col4, col5 = st.columns(2)
-    with col4:
-        fig1 = px.histogram(train_df_labelled, x="Geography", color="Exited", barmode="group",
-                            title="Churn par Géographie", color_discrete_map={"No":"green", "Yes":"red"})
-        st.plotly_chart(fig1, use_container_width=True)
+    @st.cache_data
+    def compute_figs(df):
+        fig1 = px.histogram(df, x="Geography", color="Exited", barmode="group",
+                            title="Churn par Géographie", color_discrete_map={"No": "green", "Yes": "red"})
+        fig1.update_layout(transition=dict(duration=0))
 
-    # 2. Répartition homme/femme dans le churn
-    with col5:
-        gender_churn = train_df_labelled.groupby(['Gender', 'Exited']).size().reset_index(name='count')
+        gender_churn = compute_gender_churn(df)
         fig2 = px.bar(gender_churn, x='Gender', y='count', color='Exited',
                     title="Churn par Sexe", barmode="group",
-                    color_discrete_map={"No":"green", "Yes":"red"})
+                    color_discrete_map={"No": "green", "Yes": "red"})
+        fig2.update_layout(transition=dict(duration=0))
+
+        fig3 = px.box(df, x='Exited', y='Age', color='Exited',
+                    title='Âge selon Churn', color_discrete_map={"No": "green", "Yes": "red"})
+        fig3.update_layout(transition=dict(duration=0))
+
+        return fig1, fig2, fig3
+
+
+    col4, col5 = st.columns(2)
+    with col4:
+        st.plotly_chart(fig1, use_container_width=True)
+    with col5:
         st.plotly_chart(fig2, use_container_width=True)
 
-    # 3. Age vs Churn
-    st.markdown("### 🎯 la rélation entre âge et Churn")
-    fig3 = px.box(train_df_labelled, x='Exited', y='Age', color='Exited', 
-                title='Répartition de l\'âge selon le statut (Churn)', 
-                color_discrete_map={"No": "green", "Yes": "red"})
+    st.markdown("### 🎯 la relation entre âge et Churn")
     st.plotly_chart(fig3, use_container_width=True)
+
+
+    # # 1. Répartition du Churn par Pays
+    # col4, col5 = st.columns(2)
+    # with col4:
+    #     fig1 = px.histogram(train_df_labelled, x="Geography", color="Exited", barmode="group",
+    #                         title="Churn par Géographie", color_discrete_map={"No":"green", "Yes":"red"})
+    #     st.plotly_chart(fig1, use_container_width=True)
+
+    # # 2. Répartition homme/femme dans le churn
+    # with col5:
+    #     gender_churn = train_df_labelled.groupby(['Gender', 'Exited']).size().reset_index(name='count')
+    #     fig2 = px.bar(gender_churn, x='Gender', y='count', color='Exited',
+    #                 title="Churn par Sexe", barmode="group",
+    #                 color_discrete_map={"No":"green", "Yes":"red"})
+    #     st.plotly_chart(fig2, use_container_width=True)
+
+    # # 3. Age vs Churn
+    # st.markdown("### 🎯 la rélation entre âge et Churn")
+    # fig3 = px.box(train_df_labelled, x='Exited', y='Age', color='Exited', 
+    #             title='Répartition de l\'âge selon le statut (Churn)', 
+    #             color_discrete_map={"No": "green", "Yes": "red"})
+    # st.plotly_chart(fig3, use_container_width=True)
 
     # # 4. Corrélation entre variables numériques
     # st.markdown("### 🔍 Corrélation")
