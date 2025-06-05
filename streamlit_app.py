@@ -193,7 +193,7 @@ elif st.session_state.page == "Analyse":
             f"""
             <div style="background-color:#f0f8ff; padding:10px; border-radius:10px; text-align:center">
                 <h3>👥 Clients</h3>
-                <p style="font-size:28px; color:#007acc;"><strong>{train_df_labelled.shape[0]}</strong></p>
+                <p style="font-size:18px; color:#007acc;"><strong>{train_df_labelled.shape[0]}</strong></p>
             </div>
             """,
             unsafe_allow_html=True
@@ -205,7 +205,7 @@ elif st.session_state.page == "Analyse":
             f"""
             <div style="background-color:#fff0f0; padding:10px; border-radius:10px; text-align:center">
                 <h3>❌ Churn Rate</h3>
-                <p style="font-size:28px; color:#cc0000;"><strong>{churn_rate:.2f} %</strong></p>
+                <p style="font-size:18px; color:#cc0000;"><strong>{churn_rate:.2f} %</strong></p>
             </div>
             """,
             unsafe_allow_html=True
@@ -217,7 +217,7 @@ elif st.session_state.page == "Analyse":
             f"""
             <div style="background-color:#f0fff0; padding:10px; border-radius:10px; text-align:center">
                 <h3>💰 Salaire Moyen</h3>
-                <p style="font-size:28px; color:#008000;"><strong>{avg_salary:,.0f} €</strong></p>
+                <p style="font-size:18px; color:#008000;"><strong>{avg_salary:,.0f} €</strong></p>
             </div>
             """,
             unsafe_allow_html=True
