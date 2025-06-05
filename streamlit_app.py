@@ -33,7 +33,7 @@ st.markdown(
     .stButton>button {
         background-color: black;
         color: white;
-        border: none;
+        border: #7ED957;
         padding: 0.5em 1.2em;
         border-radius: 8px;
         font-weight: bold;
@@ -47,7 +47,7 @@ st.markdown(
         transform: scale(1.05); /* agrandissement de 5% */
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         border-radius: 25px;
-        border: 2px solid #5cbf3a;
+        border: 2px solid #7ED957;
     }
 
 
@@ -178,7 +178,7 @@ if st.session_state.page == "Accueil":
     st.write("""
         Cette application vous offre des outils intuitifs pour :
         - 🟡 Prédire le **BANK CHURN** à partir de caractéristiques clés.
-        - 📊 Analyser les **du BANK CHURN**
+        - 📊 Analyser les **Caractéristiques des clients**
     """)
 
     st.info("Utilisez la barre de navigation pour explorer les différentes fonctionnalités.")
