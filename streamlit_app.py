@@ -15,6 +15,7 @@ st.markdown(
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        color: #0c0c0c;
     }
     
     h1 {
