@@ -6,6 +6,7 @@ import seaborn as sns
 import plotly.express as px
 import base64
 import dill
+import sklearn
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
