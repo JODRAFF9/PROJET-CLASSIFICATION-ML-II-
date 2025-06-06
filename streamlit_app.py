@@ -61,7 +61,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-with open("code\final_model\rl_model.pkl", "rb") as f:
+with open("code/final_model/rl_model.pkl", "rb") as f:
     model = dill.load(f)
     
 # Fonction pour charger les données (mise en cache)
