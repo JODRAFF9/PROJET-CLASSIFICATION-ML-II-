@@ -388,8 +388,17 @@ if st.session_state.page == "Prédiction":
     estimated_salary = st.number_input("Salaire estimé", min_value=0.0, value=50000.0)
     st.write("---")
     
+    if st.button("Prédire"):
+    prediction = model.predict(input_data)[0]
+    proba = model.predict_proba(input_data)[0][1]
     
-# Section Accueil
+    if prediction == 1:
+        st.error(f"⚠️ Ce client est à risque de churn (probabilité : {proba:.2f})")
+    else:
+        st.success(f"✅ Ce client est fidèle (probabilité de churn : {proba:.2f})")
+    
+    
+
 if st.session_state.page == "A-propos":
     st.header(" Description des données")
     file_path="docs/description.txt"
