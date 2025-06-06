@@ -81,6 +81,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+@st.cache_resource
 with open("code/final_model/rl_model.pkl", "rb") as f:
     model = dill.load(f)
     
