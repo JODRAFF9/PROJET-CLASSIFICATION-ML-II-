@@ -65,7 +65,7 @@ st.markdown(
 @st.cache_resource
 with open("code/final_model/rl_model.pkl", "rb") as f:
     model = dill.load(f)
-    
+
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
 def load_data(file_path):
