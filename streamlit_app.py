@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import base64
+import dill
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
@@ -60,7 +61,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
+with open("code\final_model\rl_model.pkl", "rb") as f:
+    model = dill.load(f)
+    
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
 def load_data(file_path):
@@ -353,7 +356,18 @@ elif st.session_state.page == "Analyse":
 #     """ """
 # Section Accueil
 if st.session_state.page == "Prédiction":
+    credit_score = st.number_input("Credit Score", min_value=300, max_value=900, value=650)
+    geography = st.selectbox("Pays", ["France", "Spain", "Germany"])
+    gender = st.selectbox("Genre", ["Male", "Female"])
+    age = st.slider("Âge", 18, 100, 35)
+    tenure = st.slider("Ancienneté (années)", 0, 10, 3)
+    balance = st.number_input("Solde du compte", min_value=0.0, value=10000.0)
+    num_of_products = st.selectbox("Nombre de produits bancaires", [1, 2, 3, 4])
+    has_cr_card = st.checkbox("Carte de crédit ?", value=True)
+    is_active_member = st.checkbox("Client actif ?", value=True)
+    estimated_salary = st.number_input("Salaire estimé", min_value=0.0, value=50000.0)
     st.write("---")
+    
     
 # Section Accueil
 if st.session_state.page == "A-propos":
