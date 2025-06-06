@@ -6,26 +6,7 @@ import seaborn as sns
 import plotly.express as px
 import base64
 import dill
-from sklearn import set_config
-from sklearn.compose import make_column_transformer, ColumnTransformer
-from sklearn.dummy import DummyClassifier
-from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (confusion_matrix,
-                             classification_report,
-                             ConfusionMatrixDisplay,
-                             roc_auc_score,
-                             accuracy_score,
-                             precision_score,
-                             recall_score,
-                             f1_score,
-                             RocCurveDisplay,
-                             PrecisionRecallDisplay,
-                            )
-from sklearn.model_selection import train_test_split, GridSearchCV, StratifiedKFold
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler, OrdinalEncoder, OneHotEncoder
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
