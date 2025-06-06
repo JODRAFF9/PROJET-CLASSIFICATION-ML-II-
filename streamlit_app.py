@@ -377,27 +377,30 @@ elif st.session_state.page == "Analyse":
 #     """ """
 # Section Accueil
 if st.session_state.page == "Prédiction":
-    credit_score = st.number_input("Credit Score", min_value=300, max_value=900, value=650)
-    geography = st.selectbox("Pays", ["France", "Spain", "Germany"])
-    gender = st.selectbox("Genre", ["Male", "Female"])
-    age = st.slider("Âge", 18, 100, 35)
-    tenure = st.slider("Ancienneté (années)", 0, 10, 3)
-    balance = st.number_input("Solde du compte", min_value=0.0, value=10000.0)
-    num_of_products = st.selectbox("Nombre de produits bancaires", [1, 2, 3, 4])
-    has_cr_card = st.checkbox("Carte de crédit ?", value=True)
-    is_active_member = st.checkbox("Client actif ?", value=True)
-    estimated_salary = st.number_input("Salaire estimé", min_value=0.0, value=50000.0)
-    st.write("---")
-    
+    form_data = {}
+    input_train = train_df_labelled.drop(["Exited"], axis=1)
+    # Création des champs de saisie utilisateur
+    for col_label in input_train.columns:
+        if train_df_labelled[col_label].dtype == 'object':
+            form_data[col_label] = st.selectbox(f"{col_label}", input_train[col_label].unique())
+        else:
+            form_data[col_label] = st.number_input(f"{col_label}")
+
+    input_data = pd.DataFrame([form_data])
+
+    # Affichage des données saisies
+    if st.checkbox("Afficher les données saisies :"):
+        st.dataframe(input_data)
+        st.write("---")
+    # Bouton pour effectuer la prédiction
     if st.button("Prédire"):
-    prediction = model.predict(input_data)[0]
-    proba = model.predict_proba(input_data)[0][1]
-    
-    if prediction == 1:
-        st.error(f"⚠️ Ce client est à risque de churn (probabilité : {proba:.2f})")
-    else:
-        st.success(f"✅ Ce client est fidèle (probabilité de churn : {proba:.2f})")
-    
+        st.write("---")
+        try:
+            predicted_price = np.exp(selected_model.predict(input_data))
+            st.success(f"Prix prédit ({model_choice}) : {predicted_price[0]:,.2f} unités monétaires")
+        except Exception as e:
+            st.error(f"Erreur avec le modèle {model_choice} : {e}")
+
     
 
 if st.session_state.page == "A-propos":
