@@ -2,19 +2,26 @@ import streamlit as st
 from config.setting import setup_page
 from pages import accueil, analyse, prediction, apropos
 
+
 # Configuration de la page
 setup_page()
 
-# Navigation
-PAGES = {
-    "🏠 Accueil": accueil,
-    "📊 Analyse": analyse,
-    "🔍 Prédiction": prediction,
-    "ℹ️ A-propos": apropos
-}
+st.title("🏡 **Application de Prédiction du BANK CHURN**")
+# Fonction pour changer la page active dans st.session_state
+def set_page(page_name):
+    st.session_state.page = page_name
 
-st.sidebar.title("Navigation")
-selection = st.sidebar.radio("Aller à :", list(PAGES.keys()))
-
-# Affichage de la page choisie
-PAGES[selection].app()
+# Barre de navigation horizontale avec des boutons
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    if st.button("🏠 Accueil"):
+        set_page("Accueil")
+with col2:
+    if st.button("📊 Analyse"):
+        set_page("Analyse")
+with col3:
+    if st.button("🔍 Prédiction"):
+        set_page("Prédiction")
+with col4:
+    if st.button("ℹ️ A-propos"):
+        set_page("A-propos")
