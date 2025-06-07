@@ -1,9 +1,8 @@
 import streamlit as st
 
 def setup_page():
-    st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="docs/icon.png" , layout="wide")
-
-st.markdown(
+    st.set_page_config(page_title="Prédiction du BANK CHURN ",page_icon="../docs/icon.png" , layout="wide")
+    st.markdown(
     """
     <style>
     .stApp {
@@ -48,5 +47,5 @@ st.markdown(
     </style>
     """,
     
-    unsafe_allow_html=True
-)
+    unsafe_allow_html=True)
+
