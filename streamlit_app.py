@@ -394,6 +394,5 @@ if st.session_state.page == "A-propos":
     custom_button = get_download_button_html(description, "description.txt", "📥 Télécharger la description", "#007acc")
     st.markdown(custom_button, unsafe_allow_html=True)
 
-    st.write("---") 
     st.write("---")
     
