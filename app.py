@@ -3,10 +3,12 @@ from config.setting import setup_page
 from pages import accueil, analyse, prediction, apropos
 
 
+st.title("🏡 **Application de Prédiction du BANK CHURN**")
+
 # Configuration de la page
 setup_page()
 
-st.title("🏡 **Application de Prédiction du BANK CHURN**")
+
 # Fonction pour changer la page active dans st.session_state
 def set_page(page_name):
     st.session_state.page = page_name
