@@ -1,5 +1,5 @@
 import streamlit as st
-from config.settings import setup_page
+from config.setting import setup_page
 from pages import accueil, analyse, prediction, apropos
 
 # Configuration de la page
