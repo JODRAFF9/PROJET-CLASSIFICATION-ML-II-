@@ -1,6 +1,10 @@
 import streamlit as st
 from config.setting import setup_page
-from pages import accueil, analyse, prediction, apropos
+# from pages import accueil, analyse, prediction, apropos
+
+# Initialisation de l'état de la page (si ce n'est pas déjà fait)
+if "page" not in st.session_state:
+    st.session_state.page = "Accueil"
 
 st.title("🏡 **Application de Prédiction du BANK CHURN**")
 
