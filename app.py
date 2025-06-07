@@ -8,7 +8,6 @@ st.title("🏡 **Application de Prédiction du BANK CHURN**")
 # Configuration de la page
 setup_page()
 
-
 # Fonction pour changer la page active dans st.session_state
 def set_page(page_name):
     st.session_state.page = page_name
