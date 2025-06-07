@@ -2,7 +2,6 @@ import streamlit as st
 from config.setting import setup_page
 from pages import accueil, analyse, prediction, apropos
 
-
 st.title("🏡 **Application de Prédiction du BANK CHURN**")
 
 # Configuration de la page
